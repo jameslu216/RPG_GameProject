@@ -43,7 +43,14 @@ namespace Fungus
 				{
 					case Mission.MissionState.UnLocked:
 					if(i._mapping_state.ContainsKey(i.cur_state))
-						_create_menu_command("<new>"+i.mission_name,i._mapping_state[i.cur_state]);
+					{
+						if(i.is_hidden)
+						{
+							if(!i.check_requirement()) continue;
+							_create_menu_command("<complete>"+i.mission_name,i._mapping_state[i.cur_state]);
+						}
+						else _create_menu_command("<new>"+i.mission_name,i._mapping_state[i.cur_state]);
+					}
 					else
 						Debug.Log("do not contain key");
 					break;

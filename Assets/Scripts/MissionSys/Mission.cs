@@ -28,6 +28,8 @@ public class Mission : MonoBehaviour {
 	[SerializeField] List<MissionDes> rediraction;
 
 	[SerializeField] public Dictionary<Mission.MissionState,Block> _mapping_state=new Dictionary<MissionState, Block>();
+
+	[SerializeField] public bool is_hidden;
 	
 	void Start()
 	{
@@ -66,6 +68,9 @@ public class Mission : MonoBehaviour {
 			return;
 		}
 		cur_state=MissionState.OnGoing;
+
+		if(is_hidden)
+			complete_mission();
 	}
 	public bool complete_mission()
 	{
@@ -74,14 +79,20 @@ public class Mission : MonoBehaviour {
 			Debug.Log("error use of complete mission");
 			return false;
 		}
-		foreach(var i in requirements)
-			if(!i.check_require())
-				return false;
+		if(!check_requirement()) return false;
 		
 		cur_state=MissionState.Passed;
 
 		foreach(var i in reward_action)
 			i.send_reward();
+		return true;
+	}
+	public bool check_requirement()
+	{
+		foreach(var i in requirements)
+			if(!i.check_require())
+				return false;
+
 		return true;
 	}
 }

@@ -16,6 +16,7 @@ public class MissionEditor : Editor
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("requirements"),true);
 		EditorGUILayout.PropertyField(serializedObject.FindProperty("reward_action"),true);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("rediraction"),true);
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("is_hidden"),true);
 		serializedObject.ApplyModifiedProperties();
 	}
 }

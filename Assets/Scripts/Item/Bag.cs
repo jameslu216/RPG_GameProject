@@ -8,6 +8,7 @@ namespace Item
     {
         [SerializeField] private string instanceLoadPath;
         [SerializeField] private BagDictionary content;
+
+        public BagDictionary Content => content;
     }
-    
 }

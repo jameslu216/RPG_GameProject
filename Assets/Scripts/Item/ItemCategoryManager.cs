@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Item
@@ -8,25 +9,24 @@ namespace Item
     {
         [SerializeField] private List<ItemCategory> categories = new List<ItemCategory>();
         [SerializeField] private string instanceLoadPath = "";
-
         private static ItemCategoryManager mInstance;
+
         private void OnEnable()
         {
-            mInstance = Resources.Load<ItemCategoryManager>(instanceLoadPath);
+            mInstance = AssetDatabase.LoadAssetAtPath<ItemCategoryManager>(instanceLoadPath);
         }
 
         /*
          * get the current instance of this manager (result can be null)
          */
-        public ItemCategoryManager GetInstance() => mInstance;
+        public static ItemCategoryManager Instance => mInstance;
         /*
          * get the id of specify item (return -1 if not existed) 
          */
-        public int GetID(ItemCategory it) => categories.FindIndex(x =>x.name == it.name);
+        public int GetID(ItemCategory it) => categories.FindIndex(x => x.name == it.name);
         /*
          * get ItemCategory on specify id (return null on failure)
          */
         public ItemCategory GetItemCategory(int id) => id >= categories.Count ? null : categories[id];
-        
     }
 }

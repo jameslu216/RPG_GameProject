@@ -7,5 +7,5 @@ namespace Item.Serialize
      * key: item id
      * value: item amount
      */
-    public class BagDictionary : SerializableDictionaryBase<int,int>{}
+    public class BagDictionary : SerializableDictionaryBase<int, int> { }
 }

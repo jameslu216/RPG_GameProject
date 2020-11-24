@@ -62,3 +62,6 @@ crashlytics-build.properties
 # jetbrain IDE
 .idea
 .idea/*
+
+# mac stuff
+.DS_Store

@@ -90,8 +90,22 @@ public class Player : Entity
 
 		}
 	}
+    private void OnTriggerEnter2D(Collider2D collisionInfo)
+    {
+        if (collisionInfo.gameObject.tag.Equals("Npc"))
+        {
+            Npc interactNpc = collisionInfo.gameObject.GetComponent<Npc>();
 
-	void OnTriggerStay2D(Collider2D collisionInfo)
+            if (interactNpc != null && Input.GetKeyDown(KeyCode.Space))
+            {
+                Fungus.Flowchart.BroadcastFungusMessage("interact:" + interactNpc.NpcName);
+                Debug.Log("interact:" + interactNpc.NpcName);
+            }
+
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D collisionInfo)
 	{
 		if(collisionInfo.gameObject.tag.Equals("item"))
 		{
@@ -110,10 +124,11 @@ public class Player : Entity
 			}
 		}
 	}
-	#endregion
+    #endregion
 
-
-	void Start()
+   
+    
+    void Start()
 	{
 		tf = GetComponent<Transform>();
 		//LoadPlayerData();
